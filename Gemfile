@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'nestful', :git => 'git://github.com/maccman/nestful.git'
 gem 'omniauth'
 gem 'rdiscount'
+gem 'sqlite3'
 
 group :test do
   # Pretty printed test output
@@ -22,13 +23,11 @@ group :test do
 end
 
 group :development do
-  gem 'sqlite3'
   gem "capistrano"
   gem "capistrano-ext"
   # gem "ruby-debug19", :require => "ruby-debug"
 end
 
 group :production do
-  gem 'pg'
   gem "unicorn"
 end
