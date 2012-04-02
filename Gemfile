@@ -12,21 +12,23 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'thin'
 gem 'nestful', :git => 'git://github.com/maccman/nestful.git'
 gem 'omniauth'
 gem 'rdiscount'
-
-group :development do 
-  gem 'sqlite3'
-  gem 'heroku'
-end
 
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
 end
 
+group :development do
+  gem 'sqlite3'
+  gem "capistrano"
+  gem "capistrano-ext"
+  # gem "ruby-debug19", :require => "ruby-debug"
+end
+
 group :production do
   gem 'pg'
+  gem "unicorn"
 end
