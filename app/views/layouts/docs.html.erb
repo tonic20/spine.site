@@ -17,42 +17,42 @@
   <article id="article">
   
     <nav id="nav">
-      <h2><%= link_to "Documentation", docs_path %></h2>
+      <h2><%= link_to "Документация", docs_path %></h2>
       <ul>
-        <li><%= link_to "Introduction", docs_path("introduction") %></li>
-        <li><%= link_to "Getting started", docs_path("started") %></li>
-        <li><%= link_to "Classes", docs_path("classes") %></li>
-        <li><%= link_to "Models", docs_path("models") %></li>
-        <li><%= link_to "Controllers", docs_path("controllers") %></li>
-        <li><%= link_to "Events", docs_path("events") %></li>
-        <li><%= link_to "Views", docs_path("views") %></li>
-        <li><%= link_to "Routing", docs_path("routing") %></li>
+        <li><%= link_to "Введение", docs_path("introduction") %></li>
+        <li><%= link_to "Начало работы", docs_path("started") %></li>
+        <li><%= link_to "Классы", docs_path("classes") %></li>
+        <li><%= link_to "Модели", docs_path("models") %></li>
+        <li><%= link_to "Контроллеры", docs_path("controllers") %></li>
+        <li><%= link_to "События", docs_path("events") %></li>
+        <li><%= link_to "Представления", docs_path("views") %></li>
+        <li><%= link_to "Роутинг", docs_path("routing") %></li>
       </ul>
       
-      <h2>Guides</h2>
+      <h2>Руководства</h2>
       <ul>
-        <li><%= link_to "Tutorials", docs_path("example") %></li>        
-        <li><%= link_to "Controller patterns", docs_path("controller_patterns") %></li>
-        <li><%= link_to "Controller Stacks", docs_path("stacks") %></li>
-        <li><%= link_to "Forms & Validation", docs_path("forms") %></li>
-        <li><%= link_to "Using Local Storage", docs_path("local") %></li>
-        <li><%= link_to "Using Ajax", docs_path("ajax") %></li>
-        <li><%= link_to "Using Spine.app", docs_path("app") %></li>
-        <li><%= link_to "Using Hem", docs_path("hem") %></li>
-        <li><%= link_to "Rails integration", docs_path("rails") %></li>
-        <li><%= link_to "Realtime apps", docs_path("realtime") %></li>
+        <li><%= link_to "Примеры", docs_path("example") %></li>        
+        <li><%= link_to "Шаблоны контроллеров", docs_path("controller_patterns") %></li>
+        <li><%= link_to "Стеки контроллеров", docs_path("stacks") %></li>
+        <li><%= link_to "Формы и валидации", docs_path("forms") %></li>
+        <li><%= link_to "Использование Local Storage", docs_path("local") %></li>
+        <li><%= link_to "Использование Ajax", docs_path("ajax") %></li>
+        <li><%= link_to "Использование Spine.app", docs_path("app") %></li>
+        <li><%= link_to "Использование Hem", docs_path("hem") %></li>
+        <li><%= link_to "Интеграция с Rails", docs_path("rails") %></li>
+        <li><%= link_to "Приложения реального времени", docs_path("realtime") %></li>
       </ul>
       
-      <h2>More</h2>
+      <h2>Дополнительно</h2>
       
       <ul>
         <li><%= link_to "Spine Mobile", mobile_path %></li>
-        <li><%= link_to "API Docs", api_path %></li>
+        <li><%= link_to "API", api_path %></li>
       </ul>
       
       <div id="search">
         <%= form_tag docs_path(:search), :method => :get do %>
-          <input type="search" name="query" value="" placeholder="Search..." results="0">
+          <input type="search" name="query" value="" placeholder="Поиск..." results="0">
         <%- end %>
       </div>
     </nav>
