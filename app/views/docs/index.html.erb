@@ -1,28 +1,28 @@
-<%- content_for :title do %>Documentation<% end %>
+<%- content_for :title do %>Документация<% end %>
 
-<h2>Documentation</h2>
+<h2>Документация</h2>
 
 <article>
-  <div><h3><%= link_to "Introduction", docs_path("introduction") %></h3> <span>Overview of Spine</span></div>
-  <div><h3><%= link_to "Getting started", docs_path("started") %></h3> <span>Getting started with Spine</span></div>
-  <div><h3><%= link_to "Controllers", docs_path("controllers") %></h3> <span>Intro to Spine's Controllers</span></div>
-  <div><h3><%= link_to "Models", docs_path("models") %></h3> <span>Data storage and manipulation</span></div>
-  <div><h3><%= link_to "Events", docs_path("events") %></h3> <span>Custom and controller events</span></div>
-  <div><h3><%= link_to "Routing", docs_path("routing") %></h3> <span>HTML5 history and hash support</span></div>
-  <div><h3><%= link_to "Views", docs_path("views") %></h3> <span>JS Template rendering</span></div>
-  <div><h3><%= link_to "Examples", docs_path("example") %></h3> <span>TodoList example</span></div>
+  <div><h3><%= link_to "Введение", docs_path("introduction") %></h3> <span>Обзор Spine</span></div>
+  <div><h3><%= link_to "Начало работы", docs_path("started") %></h3> <span>Начало работы с библиотекой</span></div>
+  <div><h3><%= link_to "Контроллеры", docs_path("controllers") %></h3> <span>Введение в контроллеры</span></div>
+  <div><h3><%= link_to "Модели", docs_path("models") %></h3> <span>Хранение и манипуляции с данными</span></div>
+  <div><h3><%= link_to "События", docs_path("events") %></h3> <span>События контроллеров и пользовательские</span></div>
+  <div><h3><%= link_to "Роутинг", docs_path("routing") %></h3> <span>Поддержка HTML5 history и хеш адресов</span></div>
+  <div><h3><%= link_to "Представления", docs_path("views") %></h3> <span>JS шаблоны</span></div>
+  <div><h3><%= link_to "Примеры", docs_path("example") %></h3> <span>Приложение TodoList</span></div>
   <div><h3><%= link_to "Mobile", mobile_path %></h3> <span>Spine Mobile</span></div>
 </article>
 
-<h2>Guides</h2>
+<h2>Руководства</h2>
 
 <article>
-  <div><h3><%= link_to "Controller patterns", docs_path("controller_patterns") %></h3> <span>Common controller abstractions</span></div>
-  <div><h3><%= link_to "Manager", docs_path("manager") %></h3> <span>Controller state machine</span></div>
-  <div><h3><%= link_to "Forms & Validation", docs_path("forms") %></h3> <span>Process forms and validate models</span></div>
-  <div><h3><%= link_to "Ajax", docs_path("ajax") %></h3> <span>Custom Ajax integration with models</span></div>
-  <div><h3><%= link_to "Hem", docs_path("hem") %></h3> <span>Dependency management with Hem</span></div>
-  <div><h3><%= link_to "Spine.app", docs_path("app") %></h3> <span>Generating Spine Apps</span></div>
-  <div><h3><%= link_to "Rails integration", docs_path("rails") %></h3> <span>Integrate Spine with Rails using REST</span></div>
-  <div><h3><%= link_to "Realtime apps", docs_path("realtime") %></h3> <span>Make your Spine app realtime!</span></div>
+  <div><h3><%= link_to "Контроллеры", docs_path("controller_patterns") %></h3> <span>Общие абстракции контроллеров</span></div>
+  <div><h3><%= link_to "Управление", docs_path("manager") %></h3> <span>Контроллер машина состояний</span></div>
+  <div><h3><%= link_to "Формы и Валидации", docs_path("forms") %></h3> <span>Обработка форм и валидация моделей</span></div>
+  <div><h3><%= link_to "Ajax", docs_path("ajax") %></h3> <span>Интеграция Ajax с моделями</span></div>
+  <div><h3><%= link_to "Hem", docs_path("hem") %></h3> <span>Управление зависимостями с помощью Hem</span></div>
+  <div><h3><%= link_to "Spine.app", docs_path("app") %></h3> <span>Генерируем заготовку приложения</span></div>
+  <div><h3><%= link_to "Интеграция с Rails", docs_path("rails") %></h3> <span>Интеграция с Rails используя REST</span></div>
+  <div><h3><%= link_to "Реальное время", docs_path("realtime") %></h3> <span>Сделай своё приложение в реальном времени!</span></div>
 </article>
