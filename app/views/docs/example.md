@@ -1,4 +1,4 @@
-<% title 'Step by Step Tutorials' %>
+<% title 'Пошаговое руководство' %>
 
 Spine has a number of guides that take you step by step building example applications, as well as examples of real-world applications.
 
