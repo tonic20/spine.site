@@ -1,20 +1,20 @@
-<% title 'Classes' %>
+<% title 'Классы' %>
 
-Spine provides classes as part of its JavaScript compatibility layer, as internally, Spine uses CoffeeScript classes. 
+Spine обеспечивает работу с классами, для этого используется встроенная в CoffeeScript реализация. 
 
-##Class methods
+##Методы классов
 
 ### `@sub([includeProperties, extendProperties])`
 
-Used to create new classes, or inherit from existing ones. For example, creating a new class would look like this:
+Используется для создания или наследования класса. Пример создания класса:
 
     var User = Spine.Class.sub();
     
-Or inheriting from an existing class would look like this:
+Пример наследования существующего класса:
 
     var Teacher = User.sub();
     
-You can pass in an optional set of include or extend properties that will be added to the class.
+Также в параметрах можно передавать дополнительные или расширяющие свойства, которые будут добавлены в класс.
 
     var User = Spine.Class.sub({
       instanceFunction: function(){
@@ -24,14 +24,14 @@ You can pass in an optional set of include or extend properties that will be add
     
 ### `new`
 
-Classes are constructor functions, so they can be instantiated using the `new` keyword:
+Обьект класса может быть создан с помощью ключевого слова `new`:
   
     var User = Spine.Class.sub();
     var user = new User;
 
 ### `@extend(Module)`
 
-`@extend()` adds class methods.
+Функция `@extend()` добавляет метод класса.
 
     var User = Spine.Class.sub();
     User.extend({
@@ -44,7 +44,7 @@ Classes are constructor functions, so they can be instantiated using the `new` k
 
 ### `@include(Module)`
 
-`@include()` adds instance methods.
+Функция `@include()` добавляет метод обьекта.
 
     var User = Spine.Class.sub();
     User.include({
@@ -55,10 +55,10 @@ Classes are constructor functions, so they can be instantiated using the `new` k
 
 ### `@proxy(function)`
 
-Wraps a function in a proxy, so it's always invoked in the class' context.
+Оборачивает функцию в прокси, так, что она будет исполнятся в контексте класса.
 
 ##Instance methods
 
 ### `proxy()`
 
-Wraps a function in a proxy, so it's always invoked in the instance's context.
+Оборачивает функцию в прокси, так, что она будет исполнятся в контексте объекта.

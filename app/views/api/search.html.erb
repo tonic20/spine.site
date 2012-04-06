@@ -1,4 +1,4 @@
-<% title "Searching for '#{@query}'" %>
+<% title "Поиск '#{@query}'" %>
 
 <%- @results.each do |name, context| %>
   <h2><%= link_to(name.titleize, docs_path(name)) %></h2>
