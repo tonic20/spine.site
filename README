@@ -1,6 +1,5 @@
 Site for Spine: http://spinejs.com
 
-
 Release checklist:
 
 * Update version in spine.coffee
@@ -14,3 +13,11 @@ Release checklist:
 TODO:
 
 * Change modules.md
+
+---
+
+Notes from http://spinejs.ru
+
+Deploy site with command:
+
+  $ cap deploy

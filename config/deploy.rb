@@ -22,7 +22,7 @@ set :rvm_ruby_string, "1.9.2"
 set :rvm_type, :user
 
 after "deploy:update_code", "deploy:config"
-after "deploy:update_code", "deploy:migrate"
+# after "deploy:update_code", "deploy:migrate"
 after "deploy:update", "deploy:cleanup"
 
 # Compile assets
