@@ -1,78 +1,79 @@
-<% title 'Introduction' %>
+<% title 'Введение' %>
 
-Spine is a lightweight framework for building JavaScript web applications. Spine gives you an MVC structure and then gets out of your way, allowing you to concentrate on the fun stuff, building awesome web applications.
+Spine - это легковесный фреймворк для разработки приложений на JavaScript. Spine предоставляет вам MVC архитектуру благодаря которой вы можете успешно разделить бизнес логику и представление, а также сконцентрироваться на основном разрабатывая ваши веб приложения.
 
-Spine is opinionated in its approach to web application architecture and design. Spine's architecture complements patterns such as de-coupled components and CommonJS modules, markedly helping with code quality and maintainability. 
+Spine абсолютно уверен в своем подходе к архитектуре и внутреннему дизайну веб приложений. Архитектура фреймворка Spine дополняется шаблонами вроде разделенных компонентов и CommonJS модулей, которые заметно помогают увеличить качество кода и его поддерживаемость. 
 
-The library is written in [CoffeeScript](http://jashkenas.github.com/coffee-script), but doesn't necessarily require CoffeeScript to develop applications. You can use CoffeeScript or JavaScript, whichever language you're most familiar with. 
+Библиотека написана на [CoffeeScript](http://jashkenas.github.com/coffee-script), но это не важно включать CoffeeScript в разработку приложения. Вы можете использовать JavaScript или CoffeeScript в зависимости от ваших предпочтений.
 
-Spine is tiny, the library comes in at around 500 lines of CoffeeScript, that's about 2K minified & compressed. Being lightweight and simple is fundamental to Spine.
+Spine совсем маленькая библиотека, ее код ограничивается примерно 500 строками кода, благодаря чему минифицированная и сжатая при помощи gzip библиотека весит всего 2 кб. Легковесность и простота - это философия Spine.
 
 ##Core values
 
-* *MVC* - The MVC pattern, or Model View Controller, is at the heart of Spine applications. It ensures your application is modular, name-spaced and doesn't descend into a mess of view and model logic by having a consistent architecture. It's great for teams, and brings a well needed structure to JavaScript development. 
+* *MVC* - Шаблон MVC, или Model View Controller, - это сердце приложений Spine. Он следит за модульностью вашего приложения, за использованием пространств имен и за тем, чтобы ваш проект не опускался до месива из бизнес логики и логики представления, предоставляя отлично организованную архитектуру приложения. Spine замечателен для команд и приносит часто недостающую упорядоченность в разработку на JavaScript.
 
-* *Asynchronous interfaces* - Too many JavaScript applications & frameworks don't take full advantage of the power of client-side rendering. End-users don't care if background requests to the server are pending, and don't want to see loading messages and spinners. Users want unblocked interfaces, and instant interaction. To enable this, Spine stores and renders everything client-side, communicating with the server asynchronously. 
+* *Асинхронный интерфейс* - огромное количество приложений и фреймворков написанных на JavaScript не используют по полной преимущества и мощь рендеринга на стороне клиента. Конечных пользователей не заботит если фоновые запросы не доходят до сервера и не желают видеть сообщения о загрузке и крутящиеся-вертящиеся анимированные картинки, которые намекают на то, что выполняется какая-то операция. Пользователи нуждаются в неблокируемых интерфейсах и мгновенном отклике. Для того, чтобы предоставить это Spine хранит и рендерит любые представления поддерживая асинхронную связь с сервером. 
 
-* *Simplicity* - Spine is a minimum possible viable product. It doesn't dictate your views, your HTML or your CSS. It is not a huge framework consisting of twenty different kinds of widgets. The goal is to get out your way; letting you go ahead and do what you do best, build awesome web applications. 
+* *Простота* - Spine - это необходимый минимум. Spine не диктует вам то, какими должны быть представления, ваш HTML или CSS код. Spine - это не разжиревший фреймворк состоящий из кучи виджетов и имеющий огромное количество зависимостей. Выигрыш от использования Spine состоит в том, что вы идете своим путем, а не путем навязываемым фреймворком пытаясь преодолеть появляющиеся из-за этого ограничения. Spine просто позволяет вам делать то, что вы делали еще лучше.
 
-##Why should you use Spine?
+##Почему вам следует использовать Spine?
 
-JavaScript frameworks are a dime a dozen, and more are appearing everyday. So what makes Spine so special? 
+JavaScript фреймворков существует огромное количество и практически каждый день появляются новые. Вам наверное интересно, что делает Spine особенным? 
 
-* Built in a real-world environment
-* Lightweight controller implementation (based on Backbone's API)
-* Full model layer and ORM
-* Ajax and HTML5 Local Storage adapters baked in
-* Asynchronous server communication
-* Works in all major browsers (Chrome, Safari, Firefox, IE >= 7)
-* [Spine Mobile](<%= mobile_path %>) extension
-* Simple and lightweight
-* Great documentation
+* Spine построен на основе наработок и шаблонов, которые реально используются
+* Легковесная реализация контроллера (основанная на API Backbone.js)
+* Полноценные модели и ORM
+* В комплект входят Ajax и HTML5 Local Storage адаптеры
+* Асинхронное взаимодействие с сервером
+* Работает во всех современных браузерах (Chrome, Safari, Firefox, IE >= 7)
+* Расширение [Spine Mobile](<%= mobile_path %>)
+* Легковесность и простота
+* Отличная документация
 
-But don't take my word for it. Take a look at the source of the [example applications](<%= pages_path("examples") %>), and decide for yourself.
+Однако не верьте моим словам, посмотрите на [примеры приложений](<%= pages_path("examples") %>), и сами сделайте выводы.
 
-##Components
+##Составляющие
 
-* *Spine* - The main library, containing the core classes, such as `Model` and `Controller`.
+* *Spine* - Основная библиотека, которая включает классы ядра, например `Model` и `Controller`.
 
-* *Spine Mobile* - Spine's mobile extension, letting you easily build [mobile and PhoneGap applications](<%= mobile_path %>). 
+* *Spine Mobile* - Расширение Spine для мобильных устройств, которое позволяет вам с легкостью создавать [приложения для мобильных устройств и приложений на основе PhoneGap](<%= mobile_path %>). 
 
-* *Spine.app* - The simple way of [generating Spine applications](<%= docs_path("app") %>).
+* *Spine.app* - Простейший способ [генерации приложений Spine](<%= docs_path("app") %>).
 
-* *Hem* - Spine's (optional) [dependency manager and server](<%= docs_path("hem") %>).
+* *Hem* -  Опциональный [сервер и менеджер зависимостей](<%= docs_path("hem") %>) в Spine.
 
-##CoffeeScript 
+##CoffeeScript
 
-Spine is written in [CoffeeScript](http://jashkenas.github.com/coffee-script/), a little language that compiles into JavaScript. You don't have to write Spine applications in CoffeeScript, pure JavaScript will work fine. However, using CoffeeScript will be the path of least resistance, and the one I personally advocate. 
+Spine написан на [CoffeeScript](http://jashkenas.github.com/coffee-script/), это небольшой язык программирования, который компилируется в JavaScript. Благодаря этому вы не обязаны знать CoffeeScript и писать на нем собственный код, знакомый всем JavaScript также может успешно использоваться для разработки приложений использующих Spine. Тем не менее автор Spine (и авторы перевода) рекомендуют вам использовать CoffeeScript так как этот язык упростит разработку и уменьшит количество возникающих ошибок.  
 
-CoffeeScript won't be everyone's cup of tea, and I've no doubt it'll turn some people off the framework. However, if you've qualms about the language, I urge you to at least give it a chance and check it out; you should understand what you're missing. I personally think CoffeeScript is a complete revolution in web development.
 
-For an introduction to the language, see the [The Little Book on CoffeeScript](http://arcturo.github.com/library/coffeescript/).
+CoffeeScript нравится не всем и я уверен, что то, что на нем написан Spine отвернет некоторых людей от использования фреймворка. Однако, если вы беспокоитесь о языке, я убедительно прошу вас дать шанс CoffeeScript и попробовать с ним поработать так, чтобы вы хотя бы имели понятие о том, от чего вы отказываетесь. Лично я считаю, что CoffeeScript - это действительно революция в веб разработке.
 
-Spine's documentation caters for both JavaScript and CoffeeScript developers; you can toggle source code examples between the two languages using the silver handles: <button>»</button>
+Для знакомства с языком CoffeeScript я рекомендую вам прочесть [The Little Book on CoffeeScript](http://arcturo.github.com/library/coffeescript/).
 
-Alternatively, you can toggle the language site-wide by using the language selector in the top right of the documentation. 
+Документация Spine ориентирована сразу на тех, кто использует JavaScript и тех, кто использует CoffeeScript. Работая с документацией вы можете легко переключаться между примерами кода на JavaScript и CoffeeScript используя следующего вида кнопки: <button>»</button>
 
-##Learning Spine
+Кроме того, вы можете переключать язык примеров кода сразу для всех примеров и всех страниц просто используя выпадающий список доступных языков (JavaScript и CoffeeScript) который расположен справа вверху каждой страницы документации.
 
-Spine itself is fairly straight-forward, as the library is small and the API minimal. However, it's the concepts behind JavaScript web applications that can be tricky to grasp at first. Moving state to the client-side, rendering on the client-side, and structuring your JavaScript using MVC and CommonJS modules can all be quite a learning curve. 
+##Изучение Spine
 
-It's for this reason, that Spine's docs read more like guides than raw API documentation, explaining the concepts and context to the solutions Spine brings. The pure API documentation [is also available](<%= api_path %>) once you're familiar with the library. 
+Spine сам по себе предельно прямолинеен, как библиотека Spine предельно мал и его API минимально. Однако, по началу, могут возникнуть некоторые проблемы с пониманием концепций лежащих в JavaScript приложениях с использованием Spine. Перемещение состояния на сторону клиента, рендеринг страниц на стороне клиента, а также упорядочивание вашего кода используя MVC и CommonJS модулей могут занять некоторое время на их изучение.
 
-If you're new to Spine, you should first check out the four main guides:
+Именно по этой причине документация к Spine выглядит больше похожей на руководства описывающие концепты приносимые Spine и сферу их применения, чем на скучное описание API. Документация по API [также доступна](<%= api_path %>) если вы уже знакомы со Spine. 
 
-1. [Classes](<%= docs_path("classes") %>)
-1. [Models](<%= docs_path("models") %>)
-1. [Controllers](<%= docs_path("controllers") %>)
-1. [Views](<%= docs_path("views") %>)
+Если вы новичок в Spine, вам следует начать с изучения четырех основных руководств:
 
-Then you should experiment with the [getting started guide](<%= docs_path("started") %>), learning about [generating Spine apps](<%= docs_path("app") %>), and using [Hem](<%= docs_path("hem") %>).
+1. [Классы](<%= docs_path("classes") %>)
+1. [Модели](<%= docs_path("models") %>)
+1. [Контроллеры](<%= docs_path("controllers") %>)
+1. [Представления](<%= docs_path("views") %>)
 
-Finally I'd definitely recommend browsing the source of the example applications, such as the [Todos](http://github.com/maccman/spine.todos) and [Contacts](http://github.com/maccman/spine.contacts) apps.
+После этого вам следует поэкспериментировать с руководством [Начало работы](<%= docs_path("started") %>), прочитать о [генерации приложений Spine](<%= docs_path("app") %>), и управлении зависимостями используя [Hem](<%= docs_path("hem") %>).
 
-##Companion guide
+Я также очень рекомендую вам ознакомиться с исходными кодами примеров приложений, таких как [Todos](http://github.com/maccman/spine.todos) и [Contacts](http://github.com/maccman/spine.contacts), например.
 
-Spine was built alongside a book, [*JavaScript Web Applications*](http://oreilly.com/catalog/0636920018421) by O'Reilly. The book is a really good introduction to MVC, dependency management, templates and testing, all useful concepts whichever framework you end up using.
+##Дополнительные материалы
+
+Spine создан по мотивам книги [*JavaScript Web Applications*](http://oreilly.com/catalog/0636920018421) издательства O'Reilly. Данная книга является превосходным введением в MVC, управление зависимостями, шаблоны и тестирование - все полезные концепции, которые вы будете использовать в своей работе.
 
 [![JavaScript Web Applications](http://covers.oreilly.com/images/0636920018421/cat.gif)](http://oreilly.com/catalog/0636920018421)
