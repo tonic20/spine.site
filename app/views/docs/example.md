@@ -1,23 +1,23 @@
 <% title 'Пошаговое руководство' %>
 
-Spine has a number of guides that take you step by step building example applications, as well as examples of real-world applications.
+На нашем сайте есть несколько учебных примеров, в которых пошагово показано как делать приложение, а также примеры реальных приложений.
 
-##Tutorials
+##Руководства
 
-1. If you're using the building your Spine applications in [pure JavaScript](<%= docs_path("started_js") %>), without using Node or Hem, then the [TodoList guide](<%= docs_path("example_tasks") %>) is the one for you. It takes you through building a basic CRUD application, including model persistence using HTML5 Local Storage.
+1. Если вы предпочитаете использовть Spine с [JavaScript](<%= docs_path("started_js") %>), без использования Node или Hem, то посмотрите [пример TodoList](<%= docs_path("example_tasks") %>). Это типовой пример CRUD приложения в том числе с использованием HTML5 Local Storage.
 
-1. Otherwise, if you're using [CoffeeScript and Hem](<%= docs_path("started") %>), you should checkout the [Contacts guide](<%= docs_path("example_contacts") %>), which will take you through all the steps necessary for building a fully fledged contacts manager, including CRUD, Stacks and search.
+1. Если вы будете использовать [CoffeeScript и Hem](<%= docs_path("started") %>), то смотрите учебное приложение [Contacts](<%= docs_path("example_contacts") %>), в котором можно пройти все необходимые шаги по созданию  which will take you through all the steps necessary for building a fully fledged contacts manager, including CRUD, Stacks and search.
 
-##Example applications
+##Примеры приложений
 
-Once you're familiar with guides, you may want to browse some source code and see Spine in action. I find this is one of the best ways of learning a new language or framework, especially when it comes to best practices. 
+После того как вы ознакомились с руководствами можно посмотреть исходники приложений использующих Spine в действии. Уверен что это один из лучших способов изучить новую библиотеку, особенно если примеры сделаны с использованием лучших практик.
 
-Spine has a number of these [example applications](<%= pages_path("examples") %>), such as a todo's list, a contacts manager, and some more advanced examples like a chat room. 
+Примеры приложений такие как: Todo, Contacts manager, Chat room, смотрите [здесь](<%= pages_path("examples") %>).
 
 [![Examples](https://lh4.googleusercontent.com/_IH1OempnqUc/TZF1gMnidmI/AAAAAAAABKE/b9rp9RdtA3o/s300/Screen%20shot%202011-03-29%20at%2018.58.12.png)](<%= pages_path("examples") %>)
 
-##Screencasts
+##Видео
 
-Another great way of learning is through screencasts. So far, Spine has [four screencasts](<%= pages_path("screencasts") %>) on subjects ranging from Rails integration, realtime sync and infinite scroll. If you've got any suggestions on further additional subjects for screencasts, please [get in contact](<%= pages_path("community") %>).
+Другой отличный способ изучения Spine это просмотр обучающих видео. На сайте есть несколько [видео](<%= pages_path("screencasts") %>) на тему интеграции с Rails, пример приложения реального времени и бесконечной прокрутки. Если у вас возникли вопросы, пожалуйста [обрщайтесь](<%= pages_path("community") %>).
 
 [![Screencasts](https://lh5.googleusercontent.com/-tHDIpeZ2b10/TqsIaQgMkrI/AAAAAAAABcE/oKDNP7p45ZI/s300/Screen%252520Shot%2525202011-10-28%252520at%25252020.52.37.png)](<%= pages_path("screencasts") %>)
