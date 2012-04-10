@@ -1,47 +1,47 @@
-<%- title 'Getting Started' %>
+<%- title 'Начало работы' %>
 
-Getting started with any new framework or library can be daunting, but I'm going to do my best to ensure your first introduction to Spine is as straightforward as possible.
+Начало работы с любым новым фреймворком или библиотекой может внушать страх, однако я постараюсь сделать ваше первое знакомство со Spine на столько простым, на сколько это возможно.
 
-##Three ways
+##Три способа
 
-There are three main ways of using Spine:
+Существует три способа использовать Spine:
 
-1. Plain static JavaScript for those who aren't ready to take the leap into CoffeeScript. Simply download the JavaScript files, include them in your HTML and you're good to go! If you're going down this route, please see the [Getting Started with JavaScript guide](<%= docs_path("started_js") %>)
+1. Старый, добрый JavaScript для тех, кто не готов начать использовать CoffeeScript. Просто загрузите JavaScript файлы, подключите их в ваш HTML код и вы готовы к работе! Если этот путь вам подходит, то я рекомендую вам ознакомиться с руководством [Начало работы с JavaScript](<%= docs_path("started_js") %>)
 
-1. Integration into Rails with the [spine-rails gem](https://github.com/maccman/spine-rails). Spine & Rails work really well together and integrate seamlessly. Watch the [screencast](http://vimeo.com/30976192) and read the [Rails guide](<%= docs_path("rails") %>).
+1. Интеграция в Rails с помощью gem'а [spine-rails](https://github.com/maccman/spine-rails). Spine и Rails отлично ладят между собой, а интеграция Spine производится совсем просто. Рекомендую посмотреть [скринкаст](http://vimeo.com/30976192) и почитать [Руководство по Rails](<%= docs_path("rails") %>).
 
-1. Using Node, CoffeeScript and Hem. [Hem](<%= docs_path("hem") %>) is a JavaScript dependency manager for Spine apps, and sits on top of npm to manage all your assets. This last approach is the one I personally advocate, and the path of least resistance. [Spine.app](<%= docs_path("app") %>) will generate a directory structure for your application, and Hem will serve it up to your users. 
+1. Работа с Node, CoffeeScript и Hem. [Hem](<%= docs_path("hem") %>) - это менеджер зависимостей для JavaScript приложений c использованием Spine, который работает на основе npm (Node Package Manager - менеджер пакетов для Node) используемого для управления всеми вашими расширениями. Этот последний способ - является тем способом, в который я сам использую Spine и который я рекомендую вам. [Spine.app](<%= docs_path("app") %>) - это генератор каркаса приложения, который создаст необходимую структуру директорий для вашего приложения, а Hem будет обслуживать его для ваших пользователей.
 
-This guide will cover the last approach, using Spine & Hem. However as mentioned previously, if you're not into CoffeeScript, or you're using Rails, you may want to look at the other two approaches.
+Это руководство описывает последний способ, в котором используется Spine совместно с Hem. Однако, как сказано выше, если вы отказываетесь от использования CoffeeScript или используете Rails, вам наверняка понадобится подробнее познакомиться с другими двумя способами использования Spine.
 
-##Spine.app & Hem
+##Spine.app и Hem
 
-Firstly, to make life easier, we're going to install [Spine.app](<%= docs_path("app") %>) and [Hem](<%= docs_path("hem") %>). Spine.app is a Spine application generator. It's not required to use Spine, but very useful all the same. Hem is bit like Bundler for JavaScript apps, see their respective guides for more information.
+Для начала, чтобы сделать работу удобнее, мы установим [Spine.app](<%= docs_path("app") %>) и [Hem](<%= docs_path("hem") %>). Spine.app - это генератор приложений Spine. Он не обязателен для работы со Spine, но будет очень полезен. Hem - играет роль Bundler используемого в приложениях на Ruby, но для JavaScript приложений. Обратите внимание на руководства по Hem, чтобы узнать больше.
 
-If you haven't got them installed already, you'll need [Node](http://nodejs.org) and [npm](http://npmjs.org). Both projects' sites include excellent installation instructions. Now we can get on with installing the two npm modules we need, `spine.app` and `hem`:
+Если вы еще не установили Spine.app и Hem, то вам понадобится [Node](http://nodejs.org) и [npm](http://npmjs.org). Обе эти разработки имеют отличные инструкции по установке. После установки Node и npm вы можете приступить к установке двух необходимых вам npm модулей: `spine.app` и `hem`:
 
     npm install -g spine.app hem
     
-Now we've got an executable called `spine` which we can use to generate new applications. 
+После их установки в консоли появляется команда `spine`, которую вы можете использовать для генерации приложения. 
     
     spine app my-app
     cd my-app
     
-Check out the article on [Spine.app](<%= docs_path("app") %>) for more information concerning its usage. Now let's install the default dependencies listed in our application's `package.json`:
+Рекомендую вам ознакомиться со статьей о [Spine.app](<%= docs_path("app") %>) чтобы узнать больше касательно его использования. Теперь давайте установим зависимости по умолчанию, которые описаны в файле `package.json` содержащемся в вашем приложении:
 
     npm install .
 
-Finally we can use the `hem` executable to run a Hem server, which will temporarily host our Spine application during development.
+В конце концов мы можем использовать в консоли команду `hem` для запуска Hem сервера, который будет обслуживать ваше Spine приложение во время разработки.
     
     hem server
     
-##Extending our application
+##Расширение вашего приложения
 
-Have an explore around the files Spine.app has generated. If you open up [http://localhost:9294](http://localhost:9294) you'll just see a blank page. Let's change our default controller so that it actually does something. 
+Исследовав файлы, которые сгенерировал Spine.app. Если вы перейдете в вашем браузере по адресу [http://localhost:9294](http://localhost:9294) то увидите просто пустую, белую страницу. Давайте изменим наш стандартный контроллер, чтобы он что-то делал.
     
     mate ./app/index.coffee
     
-Let's add a `@log()` statement, as demonstrated below:
+Давайте добавим выражение `@log()` как показано ниже:
     
     class App extends Spine.Controller
       constructor: ->
@@ -50,12 +50,12 @@ Let's add a `@log()` statement, as demonstrated below:
 
     module.exports = App
     
-Awesome. Now if you reload the application, you should see that log statement in the console.
+Замечательно. Теперь если вы перезагрузите приложение, то увидите в консоли сообщение о том, что приложение инициализировано.
 
-##Next steps
+##Следующие шаги
 
-Now, we've only just scratched the surface here; JavaScript Web applications are a huge area, and constantly evolving. To take your next steps with Spine, read through the [introduction](<%= docs_path("introduction") %>), the [main](<%= docs_path("models") %>) [classes](<%= docs_path("controllers") %>) and the source from some of the [example applications](<%= pages_path("examples") %>).  
+То, что мы сделали - это только верхушка айсберга. Веб приложения с JavaScript - это очень очень громоздкая тема, которая постоянно становится все больлле и больлле громоздкой. Чтобы продолжить изучение работы со Spine после изучения [введения](<%= docs_path("introduction") %>), изучите также руководства по [основным](<%= docs_path("models") %>) [классам](<%= docs_path("controllers") %>) и разберитесь с исходными кодами [примеров приложений](<%= pages_path("examples") %>) на основе Spine.  
 
-You may also be interested in [*JavaScript Web Applications*](http://oreilly.com/catalog/0636920018421) by O'Reilly, which gives you a thorough introduction to all these topics. 
+Вам должно быть будет интересна книга [*JavaScript Web Applications*](http://oreilly.com/catalog/0636920018421) издательства O'Reilly, которая представляет собой отличное введение во все интересующие вас темы касательно разработки на JavaScript. 
 
 [![JavaScript Web Applications](http://covers.oreilly.com/images/0636920018421/cat.gif)](http://oreilly.com/catalog/0636920018421)
