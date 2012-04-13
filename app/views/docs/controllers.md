@@ -1,10 +1,10 @@
-<% title 'Controllers' %>
+<% title 'Контроллеры' %>
 
-Controllers are the last part to the trinity of Spine and are very simple, being more of a set of conventions than actual code. Controllers are the glue inside your application, tying the various components together. Generally, controllers deal with adding and responding to DOM events, rendering templates and keeping views and models in sync.
+Контроллеры - это последняя из трех основных составляющих Spine. Контроллеры - это очень простая составляющая Spine, которая является скорее набором соглашений, чем реальным кодом. Контроллеры представляют собой цемент, которым соединяются компоненты вашего приложения.  Основной задачей контроллеров является обращение к элементам DOM и добавление новых элементов, а также рендеринг шаблонов и синхронизация моделей с их представлениями.
 
-##Implementation
+##Реализация
 
-Controllers, like models, extend `Spine.Module` and so inherit all of its properties. This means you can use `extend()` and `include()` to add properties onto controllers, and can take advantage of all of Spine's context management. To create a controller, inherit a class from `Spine.Controller`.
+Контроллеры, как и модели, раширяются `Spine.Module` и в такой способ наследуют все его свойства. Это означает, что вы можете использовать `extend()` и `include()` для добавления свойств в контроллеры и получаете возможность работать со всеми внутренностями Spine. Для того, чтобы создать контроллер необходимо наследовать класс от `Spine.Controller`.
     
     //= CoffeeScript
     class Tasks extends Spine.Controller
@@ -19,12 +19,12 @@ Controllers, like models, extend `Spine.Module` and so inherit all of its proper
       }
     });
 
-The convention inside Spine is to give the controller a plural camel cased name of the model it is most associated with, in this case the `Task` model. Usually, you'll only be adding instance properties onto controllers, so you can add them inline just like any other class. Instantiating controllers is done by using the `new` keyword.
+Согласно соглашению об именовании в Spine имена контроллеров должны представлять собой имена соответствующих моделей во множественном числе. В нашем случае модель носит имя `Task`. Обычно вы будете добавлять в контроллеры только свойства экземпляров, по этому вы можете добавить их как встроенные, как и любой другой класс. Создание экземпляра контроллера происходит через использование ключевого слова new.
   
     //= CoffeeScript
     tasks = new Tasks
     
-Every controller has an element associated with it, which you can access under the instance property `el`. This element is set automatically when creating a controller instance. The type of element created is specified by the `tag` property, which by default is `"div"`.
+Каждый контроллер имеет ассоциируемый с ним элемент, доступ к которому можно получить через свойство `el`. Этот элемент определяется автоматически при создании экземпляра контроллера. Тип элемента определяется через свойство `tag`, которое по умолчанию имеет значение `"div"`.
 
     //= CoffeeScript
     class TaskItem extends Spine.Controller
@@ -40,21 +40,21 @@ Every controller has an element associated with it, which you can access under t
     
     var taskItem = new TaskItem;
 
-The `el` property can also be set manually by passing it through on instantiation.
+Свойство `el` можно устанавливать вручную при создании экземпляров контроллера.
     
     //= CoffeeScript
     tasks = new Tasks(el: $("#tasks"));
 
-In fact, anything you pass on instantiation will be set as properties on the newly created instance. For example, you could pass a record that a controller would be associated with.
+Фактически все, что вы передадите в контроллер при создании экземпляров будет использовано для установки свойств экземпляра контроллера. Например, вы можете передать запись с которой будет ассоциирован контроллер.
 
     //= CoffeeScript
     taskItem = new TaskItem(item: Task.first())
 
-Inside your controller's `constructor()` function, you'll generally add event listeners to models and views, referencing a function inside the controller. 
+Внутри функции `constructor()` вашего контроллера, вы можете непосредственно добавлять наблюдателей за событиями для моделей и представлении, привязывая функцию внутри контроллера.
 
-##Events
+##События
 
-Spine gives you a shortcut for adding event listeners onto DOM elements, with the `events` property. 
+Spine предоставляет вам свойство `events` для добавления наблюдателей за событиями для элементов DOM.
 
     //= CoffeeScript
     class Tasks extends Spine.Controller
@@ -73,9 +73,9 @@ Spine gives you a shortcut for adding event listeners onto DOM elements, with th
       }
     });
     
-`events` is an object in the following format `{"eventType selector", "functionName"}`. All the selectors are scoped to the controller's associated element, `el`. If a selector isn't provided, the event will be added directly on `el`, otherwise it'll be delegated to any children matching the selector. 
+`events` - это объект, который имеет следующий формат `{"eventType selector", "functionName"}`. Все селекторы привязываются к ассоциируемому с контроллером элементу - `el`. Если селектор не указан, то событие будет добавлено собственно самому элементу `el`, а если указан, то событие будет добавлено всем дочерним элементам `el`, которые соответствуют селектору.
 
-Spine will take care of callback context for you, making sure it keeps to the current controller. Callbacks will be passed an event object, and you can access the original element the event was targeted on using `event.target`.
+Spine позаботился для вас о контексте коллбеков проверяя чтобы они были объявлены для текущего контроллера. Коллбеки будут получать объект представляющий событие и вы можете получить через него доступ к элементу которому принадлежит коллбек используя `event.target`. (Коллбек - транслитерация на callback - обратный вызов. Коллбек - это функция, которая выполняется при возникновении определенного события, например вывод сообщения при клике на кнопку.)
 
     //= CoffeeScript
     class Tasks extends Spine.Controller
@@ -94,9 +94,9 @@ Spine will take care of callback context for you, making sure it keeps to the cu
       }
     });
 
-Since Spine uses [delegation](http://api.jquery.com/delegate) for events, it doesn't matter if the contents of `el` change. The appropriate events will still be fired when necessary. 
+Так как Spine использует [delegation](http://api.jquery.com/delegate) для событий, то не важно, будет ли меняться контекст `el`. Ранее присвоенные коллбеки для событий будут успешно срабатывать при возникновении соответствующих им событий.
 
-As well as DOM events, `Spine.Controller` has been extended with `Spine.Events`, meaning that you can bind and trigger custom events. 
+Помимо событий DOM, `Spine.Controller` расширяясь при помощи `Spine.Events` позволяет вам связывать и вызывать коллбеки для собственных событий. 
 
     //= CoffeeScript
     class ToggleView extends Spine.Controller
@@ -124,9 +124,9 @@ As well as DOM events, `Spine.Controller` has been extended with `Spine.Events`,
       }
     });
 
-##Elements
+##Элементы
 
-When you first instantiate a controller, it's common to set a bunch of instance variables referencing various elements. For example, setting the `items` variable on the `Tasks` controller:
+Когда вы впервые создаете экземпляр контроллера, то обычно устанавливаете набор переменных экземпляра, которые ссылаются на различные элементы. Пример установки переменной `items` для контроллера `Tasks`:
 
     //= CoffeeScript
     class Tasks extends Spine.Controller
@@ -141,7 +141,7 @@ When you first instantiate a controller, it's common to set a bunch of instance 
       }
     });
     
-Since this is such a common scenario, Spine provides a helper, the `elements` property. This is in the format of `{"selector": "variableName"}`. When the controller is instantiated, Spine will go through `elements`, setting the appropriate elements as properties on the instance. Like with `events`, all the selectors are scoped by the controller's current element, `el`.
+Поскольку это достаточно типичная практика, Spine предоставляет свойство `elements`, которое очень удобно. Формат объекта, которым является это свойство следующий: `{"selector": "variableName"}`. Когда создаются экземпляры контроллера, Spine пробегается по `elements` устанавливая имеющиеся там элементы в качестве свойств экземпляра контроллера. Как и в случае с `events`, все селекторы привязываются к текущему элементу - `el`.
 
     //= CoffeeScript
     class Tasks extends Spine.Controller
@@ -163,6 +163,6 @@ Since this is such a common scenario, Spine provides a helper, the `elements` pr
       }
     });
 
-##API documentation
+##Документация по API
 
-For more information about controllers, please see the [full API documentation](<%= api_path("controllers") %>).
+Чтобы получить больше информации о контроллерах, пожалуйста обратите внимание на [документация по API](<%= api_path("controllers") %>).
