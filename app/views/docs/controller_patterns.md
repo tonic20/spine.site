@@ -1,10 +1,10 @@
-<% title 'Controller Patterns' %>
+<% title 'Шаблоны Контроллеров' %>
 
-We've covered most of Spine's Controller API in the [controller guide](<%= docs_path("controllers") %>), so let's have a look at some typical use cases. 
+Описание основных функций контроллеров в находится разделе [контроллеры](<%= docs_path("controllers") %>), давайте разберем некоторые типичные примеры использования. 
 
-##The Render Pattern
+##Шаблон Рендер
 
-The *render pattern* is a really useful way of binding models and views together. When the controller is instantiated, it adds an event listener to the relevant model, invoking a callback when the model is refreshed or changed. The callback will invoke the `render()` function, updating the controller's element (`el`) by replacing its contents with a rendered template. 
+Шаблон *рендер* это удобный способ соединить модель и её представление. Когда контроллер инициализируется он добавляет обработчики событий на соответствующую модель, и вызывает коллбеки когда данные модели меняются. Коллбек вызывает функцию `render()` и обновляет элемент (`el`) заменяя его содержимое новым значением полученным из шаблона. 
 
     //= CoffeeScript
     class Contacts extends Spine.Controller
@@ -33,11 +33,11 @@ The *render pattern* is a really useful way of binding models and views together
       }
     })
     
-This is a simple but blunt method for data binding, updating every element whenever a single record is changed. This is fine for uncomplicated and small lists, but you may find you need more control over individual elements, such as adding event handlers to items. This is where the *element pattern* comes in.
+Это самой простой способ для обновления элементов при обновлении данных. Это подходит для несложных и небольших списков, но вам может понадобится больше контроля над отдельными элементами, например, добавление обработчиков событий элементов. Для такой ситуации больше подходит *шаблон элемент*.
 
-##The Element pattern
+##Шаблон Элемент
 
-The element pattern essentially gives you the same functionality as the render pattern, but a lot more control. It consists of two controllers, one that controls a collection of items, and the other deals with each individual item. Let's dive right into the code to give you a good indication of how it works.
+Шаблон элемент по существу дает вам такую ​​же функциональность как шаблон рендер, но даёт гораздо больше контроля. Он состоит из двух контроллеров, который управляет коллекцией элементов. Давайте посмотрим примеры кода, чтобы получить представление о том, как это работает.
 
     //= CoffeeScript
     class ContactItem extends Spine.Controller
@@ -136,11 +136,11 @@ The element pattern essentially gives you the same functionality as the render p
         Contact.each(this.proxy(this.addOne));
       }
     });        
-    
-In the example above, `Contacts` has responsibility for adding records when they're initially created, and `ContactItem` has responsibility for the record's update and destroy events, re-rendering the record when necessary. Albeit more complicated, this gives us some advantages over the previous render pattern. 
 
-For one thing, it's more performant; the list doesn't need to be re-drawn whenever a single element changes. Furthermore, we now have a lot more control over individual items. We can place event handlers, as demonstrated with the `click` callback, and manage rendering on an item by item basis.
+В этом примере `Contacts` отвечает за добавление записей когда они создаются, а `ContactItem` отвечает за обновление, удаление и перерисовку когда это необходимо. Хотя такой вариант выглядит сложнее, это дает нам преимущества по сравнению с предыдущим шаблоном.
 
-##Next steps
+С одной стороны, это удобно, так как список не должен быть повторно отрисововатся каждый раз, когда происходит изменение одного элемента. Кроме того, теперь у нас есть намного больше контроля по каждому элементу. Мы можем поставить обработчики событий, как показано в обработчике `click` и управлять отрисовкой на уровне каждого элемента.
 
-A great example of the *element pattern* is Spine's TodoList example application, which is covered in depth in the [TodoList guide](<%= docs_path("example") %>).
+##Далее
+
+Отличный пример использования *шаблона элемент* можно посмотреть в тестовом приложении TodoList, которое разбирается подробно в разделе [примеры приложений](<%= docs_path("example") %>).

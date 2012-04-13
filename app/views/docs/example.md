@@ -4,7 +4,7 @@
 
 ##Руководства
 
-1. Если вы предпочитаете использовть Spine с [JavaScript](<%= docs_path("started_js") %>), без использования Node или Hem, то посмотрите [пример TodoList](<%= docs_path("example_tasks") %>). Это типовой пример CRUD приложения в том числе с использованием HTML5 Local Storage.
+1. Если вы предпочитаете использовть Spine с [JavaScript](<%= docs_path("started_js") %>), без использования Node или Hem, то посмотрите пример [TodoList](<%= docs_path("example_tasks") %>). Это типовой пример CRUD приложения в том числе с использованием HTML5 Local Storage.
 
 1. Если вы будете использовать [CoffeeScript и Hem](<%= docs_path("started") %>), то смотрите учебное приложение [Contacts](<%= docs_path("example_contacts") %>), в котором можно пройти все необходимые шаги по созданию  which will take you through all the steps necessary for building a fully fledged contacts manager, including CRUD, Stacks and search.
 
