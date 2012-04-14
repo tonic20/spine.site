@@ -1,10 +1,10 @@
-<% title 'Events' %>
+<% title 'События' %>
 
-Events are a powerful way of de-coupling interaction inside your application. They aren't just restricted to DOM elements, Spine gives you custom events that can be applied to any class or instance. If you're familiar with [jQuery](http://jquery.com) or [Zepto](http://zeptojs.com)'s event API, then you'll feel right at home with Spine's event implementation. Events are a great way of de-coupling and abstracting out components inside your application.
+События - это отличный способ разделения взаимодействия внутри приложения.  События не ограничиваются событиями DOM элементов, они могут быть также определены любому классу или экземпляру класса. Если вы знакомы с API событий в [jQuery](http://jquery.com) или [Zepto](http://zeptojs.com), то реализация событий в Spine покажется вам очень знакомой.
 
-##Implementation
+##Реализация
 
-`Spine.Events` is the module Spine uses for adding event support to classes. To use it, just include/extend a class with the module. 
+`Spine.Events` - это модуль Spine, который используется для добавления классам поддержки событий. Чтобы добавить события в свой класс, просто наследуйтесь им от `Spine.Events`.
 
     //= CoffeeScript
     class Tasks extends Spine.Module
@@ -14,28 +14,28 @@ Events are a powerful way of de-coupling interaction inside your application. Th
     var Tasks = Spine.Class.sub();
     Tasks.extend(Spine.Events);
     
-`Spine.Events` gives you three functions, `bind()`, `trigger()`, and `unbind()`. All three have a very similar API to jQuery's event handling one, if you're familiar with that. `bind(name, callback)` takes a event name and callback. `trigger(name, [*data])` takes an event name and optional data to be passed to handlers. `unbind(name, [callback])` takes a event name and optional callback.
+`Spine.Events` предоставляет вам три метода, `bind()`, `trigger()`, и `unbind()`. Все эти три метода имеют API очень подобное тому, что есть в jQuery. `bind(name, callback)` принимает в качестве аргументов название события и коллбек. `trigger(name, [*data])` принимает название события и необязательные данные, которые будут переданы в обработчики события. `unbind(name, [callback])` принимает имя события и необязательный параметр - коллбек.
     
     //= CoffeeScript
     Tasks.bind "create", (foo, bar) -> alert(foo + bar)
     Tasks.trigger "create", "some", "data"
 
-You can bind to multiple events by separating them with spaces. Callbacks are invoked in the context the event is associated with. 
+Вы можете привязываться ко множеству событий разделяя их названия пробелами. Коллбеки всегда вызываются в контексте с которым ассоциировано событие.
 
     //= CoffeeScript
     Tasks.bind("create update destroy", -> @trigger("change"))
     
-You can pass optional data arguments to `trigger()` that will be passed onto event callbacks. Unlike jQuery, an event object will not be passed to callbacks.
+При необходимости вы можете передавать данные в `trigger()`, эти данные будут переданы в коллбеки привязанные к событию. В отличие от jQuery в Spine объект представляющий событие не передается в коллбеки.
 
     //= CoffeeScript
     Tasks.bind "create", (name) -> alert(name)
     Tasks.trigger "create", "Take out the rubbish"
     
-Although you might never use `Spine.Events` in your own classes, you will use it with Spine's models and controllers.
+Однако вам вряд ли понадобится использовать `Spine.Events` в собственных классах, скорее всего вы ограничитесь использованием его только c моделями и контроллерами.
 
-##Global events
+##Глобальные события
 
-You can also bind and trigger global events in your application by calling `Spine.bind()` and `Spine.trigger()`.
+Вы также можете привязывать и вызывать глобальные события через вызов соответственно `Spine.bind()` и `Spine.trigger()`.
 
     //= CoffeeScript
     Spine.bind 'sidebar:show', =>
@@ -50,8 +50,8 @@ You can also bind and trigger global events in your application by calling `Spin
       
     Spine.trigger('sidebar:show');
     
-However, keep in mind that is often not such a great idea, as it introduces a degree of coupling into your code. Always ask yourself if you can use routes instead, or perhaps local controller events. 
+Однако, вам следует знать, что это может быть не самая удачная идея. Всегда спрашивайте себя можно ли использовать роутинг вместо глобальных событий или обойтись локальными событиями контроллеров.
 
-##API documentation
+##Документация по API
 
-For more information about events, please see the [full API documentation](<%= api_path("events") %>).
+Чтобы узнать больше о событиях обратите внимание на [подробную документацию по API событий](<%= api_path("events") %>).
