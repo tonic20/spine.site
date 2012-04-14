@@ -1,14 +1,14 @@
-<% title "Models" %>
+<% title "Модели" %>
 
-One of the challenges with moving state to the client-side is data management. Data management in stateful JavaScript applications is a completely different matter to how it's normally handled in conventional server side apps. There’s no request/response model, and you don’t have access to server-side variables. Instead, data is fetched remotely and stored temporarily on the client-side. This has the advantage that data access is immediate, and users are rarely, if ever, left waiting for remote data to load. 
+Одной из проблем перемещения кода на сторону клиента является управление данными. Управление данными в приложениях на JavaScript очень сильно отличается от того, как это принято делать на стороне сервера. Здесь нет привычной модели взаимоотношений запрос/ответ и у вас нет доступа к переменным серверного кода.  Вместо этого данные запрашиваются из удаленного ресурса и хранятся на стороне клиента. Преимущество такого подхода заключается в том, что доступ к данным происходит моментально, и пользователи редко долго ждут загрузки данных из удаленного ресурса.
 
-After the initial page load, remote data is stored locally in class structures called models. Models are the core to Spine, and absolutely critical to your applications. Not only do they store all the application's data, but they are also where any logic associated with that data is kept. 
+После того, как страница инициализации загружена, данные сохраняются локально в классовых структурах именуемых моделями. Модели - это основа Spine и являются невероятно важными для вашего приложения. Модели не только отвечают за хранение данных, но и за всю логику работы с этими данными.
 
-Models should be de-coupled from the rest of your application, and completely independent. Model data can be persisted with [HTML5 Local Storage](<%= docs_path("local") %>) or [Ajax](<%= docs_path("ajax") %>).
+Модели должны быть независимы и отделены от остального вашего приложения. Сохранность данных принадлежащих моделям может быть обеспечена использованием [HTML5 Local Storage](<%= docs_path("local") %>) или [Ajax](<%= docs_path("ajax") %>).
 
-##Implementation
+##Реализация
 
-Model are created by extending `Spine.Model`:
+Модели создаются наследуясь от `Spine.Model`:
     
     //= CoffeeScript
     class Contact extends Spine.Model
@@ -18,9 +18,9 @@ Model are created by extending `Spine.Model`:
     var Contact = Spine.Model.sub();
     Contact.configure("Contact", "first_name", "last_name");
       
-You should call `configure()` before anything else inside the model, since it bootstraps various variables and events. Pass `configure()` the model name, and any attributes the model has. 
+Прежде всего в контексте модели вы должны вызывать `configure()` это функция установит различные необходимые переменные и события. В качестве аргументов в `configure()` следует передавать имя модели и любые ее атрибуты. 
 
-Models are like any other CoffeeScript class, so you can add class/instance methods as usual:
+Модели - это совершенно обыкновенные CoffeeScript классы, что означает, что вы можете добавить методы класса и методы экземпляров:
 
     //= CoffeeScript
     class Contact extends Spine.Model
@@ -50,7 +50,7 @@ Models are like any other CoffeeScript class, so you can add class/instance meth
       }
     });
       
-Models are Spine [modules](<%= docs_path("classes") %>), so you can treat them as such, extending and including properties.
+Модели являются [модулями](<%= docs_path("classes") %>) Spine поэтому вы можете расширять их модулями расширений и различными свойствами.
     
     //= CoffeeScript
     class Contact extends Spine.Model
@@ -64,7 +64,7 @@ Models are Spine [modules](<%= docs_path("classes") %>), so you can treat them a
     
     Contact.extend(MyModule);
     
-Model instances are created with `new`, passing in an optional set of attributes.
+Экземпляры моделей создаются используя ключевое слово `new`, а в функцию - конструктор (класс) передается опциональный набор аргументов..
 
     //= CoffeeScript
     contact = new Contact(first_name: "Alex", last_name: "MacCaw")
@@ -74,7 +74,7 @@ Model instances are created with `new`, passing in an optional set of attributes
     var contact = new Contact({first_name: "Alex", last_name: "MacCaw"});
     assertEqual( contact.fullName(), "Alex MacCaw" );
     
-Models can be also be easily subclassed:
+Модели могут быть легко наследованы:
 
     //= CoffeeScript
     class User extends Contact
@@ -84,9 +84,9 @@ Models can be also be easily subclassed:
     var User = Contact.sub();
     User.configure("User");
     
-##Saving/Retrieving Records
+##Сохранение записей и обращение к ним
 
-Once an instance is created it can be saved in memory by calling `save()`.
+После того, как экземпляр модели создан вы можете сохранить его в памяти использовав метод `save()`.
     
     //= CoffeeScript
     class Contact extends Spine.Model
@@ -102,20 +102,20 @@ Once an instance is created it can be saved in memory by calling `save()`.
     var contact = new Contact({first_name: "Joe"});
     contact.save();
     
-When a record is saved, Spine automatically creates an ID if it doesn't already exist.
+Когда запись сохранена, Spine присваивает ей уникальный идентификатор, если тот не был установлен ранее.
 
     assertEqual( contact.id, "AD9408B3-1229-4150-A6CC-B507DFDF8E90" )
     
-You can use this ID to retrieve the saved record using `find()`.
+Вы можете использовать идентификатор записи для обращения к ней используя `find()`.
 
     identicalContact = Contact.find( contact.id )
     assert( contact.eql( identicalContact ) )
     
-If `find()` fails to retrieve a record, an exception will be thrown. You can check for the existence of records without fear of an exception by calling `exists()`.
+Если `find()` не находит запись, то будет вызвана исключительная ситуация. Вы можете проверить существование записи с тем или иным идентификатором используя `exists()`.
 
     assert( Contact.exists( contact.id ) )
     
-Once you've changed any of a record's attributes, you can update it in-memory by re-calling `save()`.
+После того, как некоторые атрибуты записи были изменены, вы можете сохранить их, повторно вызвав метод `save()`.
     
     //= CoffeeScript
     contact = Contact.create(first_name: "Polo")
@@ -123,36 +123,36 @@ Once you've changed any of a record's attributes, you can update it in-memory by
     contact.first_name = "Marko"
     contact.save()
     
-You can also use `first()` or `last()` on the model to retrieve the first and last records respectively.
+Вам также доступны методы `first()` или `last()` для обращения соответственно к первой и последней записи.
 
     //= CoffeeScript
     firstContact = Contact.first()
     
-To retrieve every contact, use `all()`.
+Чтобы получить сразу все записи контактов используйте метод `all()`.
   
     //= CoffeeScript
     contacts = Contact.all()
     console.log(contact.name) for contact in contacts
 
-You can pass a function that'll be iterated over every record using `each()`.
+Вы можете назначить функцию, которая будет применена ко всем записям по очереди используя `each()`.
 
     //= CoffeeScript
     Contact.each (contact) -> console.log(contact.first_name)
     
-Or select a subset of records with `select()`.
+Или получить набор определенных записей используя `select()`.
 
     //= CoffeeScript
     Contact.select (contact) -> contact.first_name
     
-##Validation
+##Валидация
 
-Validating models is dirt simple, simply override the `validate()` function with your own custom one.
+Валидация моделей предельно проста, просто перепишите функцию  `validate()` так, как вам нужно.
 
     //= CoffeeScript
     class Contact extends Spine.Model
       validate: ->
         unless @first_name
-          "First name is required"
+          "Необходимо указать имя"
           
     //= JavaScript
     var Contact = Spine.Model.sub();
@@ -160,26 +160,26 @@ Validating models is dirt simple, simply override the `validate()` function with
     Contact.include({
       validate: function(){
         if ( !this.first_name )
-          return "First name is required";
+          return "Необходимо указать имя";
       }
     });
 
-If `validate()` returns anything, the validation will fail and an *error* event will be fired on the model. You can catch this by listening for it on the model, notifying the user.
+Если `validate()` возвращает какое-либо значение, то это свидетельствует о том, что валидация провалена и произошло событие *error* модели. Вы можете вылавливать это событие через добавление наблюдателей за ним.
     
     //= CoffeeScript
     Contact.bind "error", (rec, msg) ->
-      alert("Contact failed to save - " + msg)
+      alert("Не удается сохранить контакт - " + msg)
     
-In addition, `save()`, `create()` and `updateAttributes()` will all return false if validation fails. For more information about validation, see the [validation guide](<%= docs_path("forms") %>).
+Кроме того, `save()`, `create()` и `updateAttributes()` возвращают false в случае, когда валидация провалилась. Чтобы узнать больше о валидации обратите внимание на [руководство по валидации](<%= docs_path("forms") %>).
 
-##Serialization
+##Сериализация
 
-Spine's models include special support for JSON serialization. To serialize a record, call `JSON.stringify()` passing the record, or to serialize every record, pass the model.
+Модели в Spine имеют поддержку JSON сериализации. Для сериализации модели вызовите метод `JSON.stringify()` передав в него запись, или для сериализации всех записей передав модель.
 
     JSON.stringify(Contact)
     JSON.stringify(Contact.first())
     
-Alternatively, you can retrieve an instance's attributes and implement your own serialization by calling `attributes()`.
+Как вариант вы можете обратиться к атрибутам экземпляра модели через `attributes()` и реализовать свою собственную сериализацию.
 
     //= CoffeeScript
     contact = new Contact(first_name: "Leo")
@@ -189,66 +189,66 @@ Alternatively, you can retrieve an instance's attributes and implement your own 
       toXML: ->
         serializeToXML(@attributes())
     
-If you're using an older browser which doesn't have native JSON support (i.e. IE 7), you'll need to include [json2.js](https://github.com/douglascrockford/JSON-js/blob/master/json2.js) which adds legacy support. 
+Если вы используете старые браузеры, которые не имеют встроенной поддержки JSON (например IE 7), то вам необходимо будет подключить [json2.js](https://github.com/douglascrockford/JSON-js/blob/master/json2.js) - это библиотека, которая добавит поддержку JSON. 
 
-##Persistence
+##Сохранность данных
 
-While storing records in memory is useful for quick retrieval, persisting them in one way or another is often required. Spine includes a number of pre-existing storage modules, such as Ajax and HTML5 Local Storage, which you can use for persistence. Please check out the [Ajax](<%= docs_path("ajax") %>) and [Local Storage guides](<%= docs_path("local") %>)) for more information. 
+В Spine приложениях данные хранятся в оперативной памяти для быстрого доступа к ним, однако из-за возможности потерять их во время какого-либо сбоя, вам следует в тот или иной способ позаботиться об их сохранности. Spine включает в себя набор модулей обеспечивающих сохранность данных, например модуль для отправки Ajax запросов на сервер и модуль для работы с HTML5 Local Storage, которые вы можете использовать для хранения данных соответственно на сервере или на клиенте. Обратите ваше внимание на [руководство по работе с Ajax](<%= docs_path("ajax") %>) и [руководство по Local Storage](<%= docs_path("local") %>)) чтобы узнать больше. 
 
-##Events
+##События
 
-You've already seen that models have some events associated with them, such as *error* and *ajaxError*, but what about callbacks to create/update/destroy operations? Well, conveniently Spine includes those too, allowing you to bind to the following events:
+Вы уже знаете, что модели имеют ассоциируемые с ними события, например *error* или *ajaxError*, однако что насчет коллбеков для создания, обновления или уничтожения записи? Разумеется, разработчики Spine позаботились об этом и потому вы можете пользоваться коллбеками для следующих событий:
 
-* *save* - record was saved (either created/updated)
-* *update* - record was updated
-* *create* - record was created
-* *destroy* - record was destroyed
-* *change* - any of the above, record was created/updated/destroyed
-* *refresh* - all records invalidated and replaced
-* *error* - validation failed
+* *save* - запись сохранена (создана и сохранена или обновлена ранее существующая)
+* *update* - запись обновлена
+* *create* - создана новая запись
+* *destroy* - запись уничтожена
+* *change* - любое из ранее перечисленных событий (сохранение, изменение, создание новой записи или ее уничтожение)
+* *refresh* - все записи не проходят валидацию и заменены
+* *error* - провал валидации
 
-For example, you can bind to a model's *create* event like so:
+Используя коллбеки, мы можете привязать к событию *create* какое-либо действие, например:
 
     //= CoffeeScript
     Contact.bind "create", (newRecord) ->
-      # New record was created
+      # создана новая запись
     
-For model level callbacks, any associated record is always passed to the callback. The other option is to bind to the event directly on the record.
+В коллбеках уровня модели ассоциируемая запись всегда передается в коллбек. Как вариант вы можете привязывать коллбек к событию напрямую через запись.
 
     //= CoffeeScript
     contact = Contact.first()
     contact.bind "save", -> 
-      # Contact was updated
+      # Contact обновлен
       updateInterface()
     
-The callback's context will be the record that the event listener was placed on. You'll find model events crucial when it comes to binding records to the view, making sure the view is kept in sync with your application's data. 
+Контекстом выполнения функции - коллбека является та запись для событий в которой назначен наблюдатель. Вы найдете события модели очень важными, например, привязывая записи к их представлениям и проверяя синхронизацию представлений с данными приложения.
 
-If you want to remove events, you can unbind specific events by calling `unbind()` on the Model. See the [event documentation](<%= docs_path("events") %>) for more information on how you should use `unbind()`. Model instances also have an `unbind()` function, but it can only be used to remove every event listener associated with that instance. 
+Если вы хотите отменить выполнение коллбеков для определенных действий, то вам необходимо использовать метод `unbind()` модели. Обратите внимание на [руководство по событиям](<%= docs_path("events") %>) чтобы узнать больше о том, как использовать `unbind()`. Экземпляры модели также обладают методом `unbind()`, но в случае с экземпляром модели, `unbind()` отменит коллбеки только для того экземпляра (записи), для которого он вызван.
 
-##Dynamic records
+##Динамические записи
 
-One rather neat addition to Spine's models is dynamic records, which use prototypal inheritance to stay updated. Any calls to `find()`, `all()`, `first()`, `last()` etc, and model event callbacks return a *clone* of the saved record. This means that whenever a record is updated, all of its clones will immediately reflect that update.
+Одной замечательной особенностью моделей Spine являются динамические записи, которые используют наследование на прототипах для синхронизации копий экземпляров модели. Вызов любого метода `find()`, `all()`, `first()`, `last()` и т.д., и коллбек повешенный на события модели вернет *клон* сохраненной записи. Это означает, что после сохранения изменений экземпляра модели (записи), все ее копии (клоны) автоматически получат актуальные данные, то есть будут синхронизированы.
 
-Let's give you a code example; we're going to create an asset, and a clone of that asset. You'll notice that when the asset is updated, the clone has also automatically changed. 
+Давайте рассмотрим пример кода. Мы хотим создать asset и затем создать его клон. При этом нам необходимо сделать так, чтобы при обновлении записи ее клон также автоматически обновился.
 
     //= CoffeeScript
     asset = Asset.create(name: "whatshisname")
     
-    # Completely new asset instance
+    # Абсолютно новый экземпляр asset
     clone = Asset.find(asset.id)
 
-    # Change saved asset
+    # Изменяем сохраненный asset
     asset.updateAttributes(name: "bob")
     
-    # Clone reflects changes
+    # Проверяем появились ли изменения у клона записи
     assertEqual(clone.name, "bob")
     
-This means that you never have to bother calling some sort of `reload()` functions on instances. You can be sure that all instances are constantly in sync with their saved versions.
+Это означает, что вам не нужно вызывать метод вроде `reload()` для экземпляров, чтобы синхронизировать их. Вы можете быть уверены, что все копии записи будут обновлены при сохранении обновлений одной из них.
 
-##Relationships
+##Ассоциирование моделей
 
-Spine has support for *has-many*, *has-one* and *belongs-to* model relationships. For more information, see the [relationships guide](<%= docs_path("relations") %>).
+Spine имеет поддержку ассоциаций моделей, таких как: *has-many*, *has-one* и *belongs-to*. Чтобы узнать больше об отношениях (ассоциациях) между моделями обратите внимание на [руководство по ассоциированию моделей](<%= docs_path("relations") %>).
 
-##API documentation
+##Документация по API
 
-For more information about models, please see the [full API documentation](<%= api_path("models") %>).
+Чтобы узнать больше о моделях, обратите внимание на [документацию по API](<%= api_path("models") %>).
