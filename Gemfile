@@ -16,6 +16,7 @@ gem 'nestful', :git => 'git://github.com/maccman/nestful.git'
 gem 'omniauth'
 gem 'rdiscount'
 gem 'sqlite3'
+gem 'orphus_rails', :git => 'git://github.com/tonic20/orphus_rails.git'
 
 group :test do
   # Pretty printed test output

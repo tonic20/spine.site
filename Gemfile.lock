@@ -62,6 +62,12 @@ GIT
       rdoc (~> 3.4)
       thor (~> 0.14.6)
 
+GIT
+  remote: git://github.com/tonic20/orphus_rails.git
+  revision: f9f8b091ef274f9b2c1b42c86096aad3c636b4c4
+  specs:
+    orphus_rails (0.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -156,6 +162,7 @@ DEPENDENCIES
   jquery-rails
   nestful!
   omniauth
+  orphus_rails!
   rails!
   rdiscount
   sqlite3
