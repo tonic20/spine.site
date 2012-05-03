@@ -1,29 +1,29 @@
-<% title 'Classes and Modules' %>
+<% title 'Классы и модули' %>
 
-Classes are a great way of encapsulating logic and name-spacing. They're used throughout Spine, especially when it comes to models and controllers. JavaScript's object literals are fine for static classes, but it's often useful to create classical classes with inheritance and instances.
+Классы - отличный способ инкапсуляции логики и создания пространств имен. Классы повсеместно используются в Spine, например модели и контроллеры являются классами. Объектный литерал в JavaScript не только отлично подходит для создания статических классов, но и часто может быть полезен для создания классических классов с наследованиями и экземплярами.
 
-Although JavaScript doesn't have native class support, it can be emulated fairly convincingly using constructor functions and prototypal inheritance. Classes are just another tool, and are as useful in JavaScript as they are in any other language. 
+Так как JavaScript не имеет поддержки классов, то они эмулируются через использование функций - конструкторов и прототипов объеков. Классы - это просто другой инструмент, и они очень полезны в JavaScript, как и в любом другом языке программирования.
 
-If you're using pure JavaScript to build your applications, rather than CoffeeScript, you should check out the penultimate section in this guide, *JavaScript Classes*. 
+Если вы используете JavaScript вместо CoffeeScript для разработки ваших приложений, то вам следует взглянуть на предпоследний раздел этого руководства - *JavaScript классы*. 
 
-##Implementation
+##Реализация
 
-For classes, Spine uses CoffeeScript's [native class implementation](http://arcturo.github.com/library/coffeescript/03_classes.html), for example:
+Для классов Spine Использует [собственную реализацию классов](http://arcturo.github.com/library/coffeescript/03_classes.html) в CoffeeScript, например:
 
     class User
-      # Class method
+      # метод класса
       @find: (id) ->
         (@records or= {})[id]
       
-      # called on instantiation
+      # конструктор - вызывается при инициализации экземпляров
       constructor: (attributes = {}) ->
         @attributes = attributes
 
-      # Instance methods
+      # методы экземпляров
       save: ->
       destroy: ->
       
-To instantiate classes, use the `new` keyword (behind the scenes, classes are constructor functions).
+Для создания экземпляров класса используйте ключевое слово `new` (под капотом классов скрываются функции - конструкторы).
       
     user = new User(name: "Dark Knight")
     user.save()
@@ -31,17 +31,17 @@ To instantiate classes, use the `new` keyword (behind the scenes, classes are co
     
     user = User.find(1)
     
-To inherit one class for another in CoffeeScript, use `extends`.
+Для наследования одного класса от другого в CoffeeScript, используйте `extends`.
 
     class Users extends Spine.Controller
       constructor: ->
         super
 
-If you're extending another class, and overriding the `constructor` function, make sure you call `super` - especially when it comes to Spine models and controllers.
+Если вы расширяете другой класс и переписываете функцию `constructor`, то вам следует убедиться в том, что вы не забыли вызвать внутри конструктора `super`, особенно когда это касается моделей и конструкторов Spine. `super` позволяет вызвать оригинальный метод в контексте того, который его перекрывает.
 
-##Context
+##Контекст
 
-JavaScript programs often involve a lot of context changes, especially when it comes to event callbacks. Rather than manually proxying callbacks, so they're executed in the correct scope, CoffeeScript's function syntax provides a useful alternative, fat arrow functions (`=>`). 
+Приложения JavaScript часто включают множество переключений контекста, особенно когда речь идет о коллбеках определенных для событий. Вместо того, чтобы вручную проксировать коллбеки, чтобы те выполнялись в правильном контексте, вам следует использовать особый синтаксис функций в CoffeeScript в котором используется `fat arrow` (жирная стрелка) то есть вот это обозначение функции: `=>`. 
 
     class TaskApp extends Spine.Controller
       constructor: ->
@@ -57,44 +57,44 @@ JavaScript programs often involve a lot of context changes, especially when it c
       addAll: =>
         Task.each(@addOne)
         
-In the example above, `addOne()` and `addAll()` are both using the fat arrow function definitions (`=>`), rather than the normal thin arrows (`->`). This preserves the function's execution context, so although the `Task` event callbacks are executing them in the context of `Task`, they're proxied and run in the the correct context, `TaskApp`.
+В примере выше обе функции `addOne()` и `addAll()` используют определение функции с `fat arrow` (`=>`), вместо обычной (`->`). Это определяет контекст выполнения функций, таким образом, что, не смотря на то, что коллбеки определенные для событий `Task` будут вызывать их в контексте `Task`, сами эти функции будут выполняться в контексте `TaskApp`.
     
-For more information about classes, see [The Little Book on CoffeeScript](http://arcturo.github.com/library/coffeescript/03_classes.html).
+Чтобы узнать больше о классах CoffeeScript обратите внимание на [The Little Book on CoffeeScript](http://arcturo.github.com/library/coffeescript/03_classes.html).
 
-##Modules
+##Модули
 
-Spine extends CoffeeScript's classes with support for modules, using `Spine.Module`. This gives you `@extend()` and `@include()` support, for easily adding class and instance properties respectively. To use modules, just inherit a class from `Spine.Module`.
+Spine расширяет классы в CoffeeScript поддержкой модулей, используя `Spine.Module`. Это позволяет вам легко расширять классы и их экземпляры свойствами используя соответственно `@extend()` и `@include()`. Чтобы использовать модули, просто наследуйте ваши классы от `Spine.Module`.
     
     class MyTest extends Spine.Module
       @extend ClassModule
       @include InstanceModule
       
-Spine's internal classes inherit from `Spine.Module`, so they all have `@extend()` and `@include()` support:
+Внутренние классы Spine наследуются от `Spine.Module`, таким образом все они уже имеют поддержку `@extend()` и `@include()`:
 
     class User extends Spine.Model
       @configure "User"
       @extend Spine.Model.Ajax
   
-Modules are simply a set of properties, like so:
+Модули - это просто набор свойств, например:
     
     OrmModule = {
       find: (id) -> /* ... */
     }
     
-Modules can also contain callback functions, `extended()` and `included()`:
+Модули также могут включать функции - коллбеки, `extended()` и `included()`:
 
     OrmModule =
       find: (id) -> /* ... */
       extended: -> 
         console.log("module extended: ", @)
 
-##JavaScript classes
+##JavaScript классы
 
-If you're writing your CoffeeScript languages in plain JavaScript, you obviously don't have access to CoffeeScript's class syntax. Spine solves this problem for you, by exposing `Spine.Class`:
+Если вы пишите на JavaScript, то вы очевидно не имеете доступа к синтаксису объявления классов CoffeeScript. Spine решает эту проблему через `Spine.Class`:
 
     var Users = Spine.Class.sub();
     
-Calling `sub()` on a class will subclass it. You can either pass `sub()` a set of instance and class properties, or call `extend()` and `include()` directly on the class. 
+Вызов `sub()` для класса возвращает его наследуемый от него класс. Вы также можете передать в `sub()` набор свойств экземпляров и класса или вызывать `extend()` и `include()` напрямую из класса. 
     
     Users.extend({
       find: function(id){
@@ -108,22 +108,22 @@ Calling `sub()` on a class will subclass it. You can either pass `sub()` a set o
       }
     });
     
-To inherit from the `Users` class in the example above, simple call `sub()` on it:
+Для наследования от класса `Users` в примере ниже просто вызывается метод `sub()`:
 
     var Owner = Users.sub();
     
-Rather than `constructor`, class initialization functions are called `init()`
+Функция инициализации класса называется `init()`:
 
     var User = Spine.Class.sub({
       init: function(){
-        // Called on instantiation
+        // вызывается при создании экземпляров
         console.log(arguments);
       }
     });
     
     var user = new User({name: "Spock"});
 
-Calling parent (super) functions is slightly more convoluted than in CoffeeScript.
+Вызов оригинальных функции (через super) выглядит значительно сложнее чем в CoffeeScript.
 
     var User = Spine.Controller.sub({
       init: function(){
@@ -131,8 +131,8 @@ Calling parent (super) functions is slightly more convoluted than in CoffeeScrip
       }
     });
     
-As you can see in the example above, using Spine controllers and models from JavaScript is simply a matter of calling `sub()` on them.
+Как вы могли увидеть в примерах выше, использовать контроллеры и модели Spine в ортодоксальном JavaScript заключается просто в вызове метода `sub()` для них.
 
 ##API
 
-For more information about classes, please see the [full API](<%= api_path("classes") %>).
+Чтобы узнать больше о классах, обратите внимание на [подробное API](<%= api_path("classes") %>).

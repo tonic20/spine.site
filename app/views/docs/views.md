@@ -1,18 +1,18 @@
-<% title 'Views & Templating' %>
+<% title 'Представления и шаблонизация' %>
 
-In Spine's terminology, views are simple fragments of HTML that make up the interface to your application. Spine doesn't have any complex UI widgets or dictate the structure of your views, they're completely up to you. 
+Согласно принятой в Spine терминологии, представления - это просто фрагменты HTML которые создают интерфейс вашего приложения. Spine не содержит каких-либо сложных виджетов для построения интерфейсов и не предписывает вам использовать какую-либо структуру представлений.
 
-To ensure your application's interface is completely asynchronous and responsive, you should be doing **all** the view rendering client-side. This means instead of server-side templates, like Ruby's ERB or Python’s string formatting, we're going to need client-side JavaScript templates.
+Чтобы быть уверенными, что интерфейс вашего приложения полностью асинхронный и подстраивается под устройство отображающее его (монитор компьютера, мобильный телефон и т.д.), вам следует выполнять рендеринг всех представлений вашего приложения на стороне клиента. Это означает, что вместо использования ERB (или других шаблонизаторов) в Ruby, или форматирования строк в Python, вам следует использовать шаблоны JavaScript, которые рендерятся на клиенте.
 
-There are a number of good candidates, such as [Mustache](http://mustache.github.com) and [jQuery.tmpl](http://api.jquery.com/category/plugins/templates). We're going to demonstrate a library called [Eco](https://github.com/sstephenson/eco) here.
+Существует несколько отличных решений для рендеринга на стороне клиента, например [Mustache](http://mustache.github.com) и [jQuery.tmpl](http://api.jquery.com/category/plugins/templates). В наших примерах мы будем использовать библиотеку называемую [Eco](https://github.com/sstephenson/eco).
 
-If you're building your application in pure JavaScript, rather than CoffeeScript, I recommend looking at the [jQuery.tmpl guide](<%= docs_path("views_tmpl") %>)  instead.
+Если вы создаете ваше приложения на JavaScript, а не на CoffeeScript, то я рекомендую вам взглянуть на [руководство по jQuery.tmpl](<%= docs_path("views_tmpl") %>) вместо чтения этой статьи.
 
-##Eco templates
+##Шаблоны Eco
 
-JavaScript templates are very similar to server side ones. You have template tags interoperated with HTML, and during rendering those tags get evaluated and replaced. The great thing about [Eco](https://github.com/sstephenson/eco) templates, is they're actually written in CoffeeScript, a language you should be familiar with if you've been developing Spine applications. 
+Шаблоны JavaScript очень похожи на шаблоны, что используются на стороне сервера. У вас в распоряжении находятся специальные теги шаблонов, которые взаимодействуют с HTML. Во время рендеринга эти теги выполняются и заменяются на HTML код. Отличная особенность шаблонов [Eco](https://github.com/sstephenson/eco) - это то, что они написаны на CoffeeScript, языке, с которым вы должно быть хорошо знакомы если используете Spine.
 
-Here's an example:
+Вот пример шаблона с тегами Eco:
 
     <%% if @projects.length: %>
       <%% for project in @projects: %>
@@ -23,46 +23,46 @@ Here's an example:
       No projects
     <%% end %>
 
-As you can see, the syntax is remarkably straightforward. Just use `<%%` tags for evaluating expressions, and `<%=` tags for printing them. The full list of template tags is as follows:
+Как видите, синтаксис шаблонов удивительно прост. Просто используйте `<%%` теги для выполнения выражений на CoffeeScript и `<%%=` теги для печати возвращаемого значения. Ниже приведен полный список тегов шаблонов:
     
-* `<% expression %>`  
-  Evaluate a CoffeeScript expression without printing its return value.
+* `<%% expression %>`  
+  Выполняет выражение CoffeeScript без его печати.
 
 * `<%%= expression %>`  
-  Evaluate a CoffeeScript expression, escape its return value, and print it.
+  Выполняет выражение CoffeeScript и печатает результат его выполнения, `<` и `>` заменяются соответственно на `&lt;` и `&gt;` (выполняется экранизация тегов).
 
 * `<%%- expression %>`  
-  Evaluate a CoffeeScript expression and print its return value without escaping it.
+  Выполняет выражение CoffeeScript и печатает его результат без экранизации тегов.
 
 * `<%%= @property %>`  
-  Print the escaped value of the property property from the context object passed to render.
+  Экранизирует и печатает значение определенного свойства из контекста объекта, который передан для рендеринга шаблона.
 
 * `<%%= @helper() %>`  
-  Call the helper method helper from the context object passed to render, then print its escaped return value.
+  Вызывает метод helper из контекста переданного в шаблон объекта и печатает результат его выполнения предварительно экранировав теги.
 
 * `<%% @helper -> %>...<%% end %>`  
-  Call the helper method helper with a function as its first argument. When invoked, the function will capture and return the content ... inside the tag.
+  Вызывает метод helper, который первым аргументом принимает функцию. Функция захватывает содержимое тега (...) и выводит его по выполнении.
   
-Templates are evaluated with a context, such as a model instance. CoffeeScript's `@` symbol, i.e. `this`, points to the context. 
+Рендеринг шаблонов выполняется в определенном контексте, например в контексте экземпляра модели. В CoffeeScript символ `@` является альтернативой для `this` в JavaScript и ссылается на контекст. 
 
-##Compiling templates
+##Компиляция шаблонов
 
-Eco lets you compile templates dynamically in the browser, or pre-compile them using Node. I advise the latter, as pre-processing is a one-off process that saves your clients some processing time. 
+Eco позволяет вам рендерить шаблоны динамически, прямо в браузере, или выполнять их предварительную компиляцию используя Node. Лично мне больше нравится второй вариант, поскольку он ускоряет работу рендеринга шаблонов за счет того, что устраняется одна из стадий рендеринга и пользователь быстрее получает готовую HTML страницу.
 
-[Hem](<%= docs_path("hem") %>) actually comes with built in support for pre-compiling eco templates, it's simply a case of naming views with a `.eco` extension. They're wrapped up automatically with the rest of your application as functions, and can be used by just calling them:
+[Hem](<%= docs_path("hem") %>) изначально поставляется с встроенной поддержкой предварительной компиляции eco шаблонов, предварительная компиляция шаблонов очень проста, если они носят расширение `.eco`. Они оборачиваются в ваше приложение автоматически и доступны в виде функций, что позволяет их использовать через вызов этих функций.
     
     render: ->
       @html require("app/views/contact")(@contact)
       
-As you can see in the example above, we're just requiring the view, then calling it immediately, passing in the relevant context (in this case, a model record). 
+Как видно в примере выше, мы просто запрашиваем представление, а затем вызываем его непосредственно указывая в аргументах вызова контекст (в данном случае это экземпляр модели).
 
-Calling the view returns the rendered template as a string, which we're passing straight to the `@html()` function, updating the controller's `@el` element.
+Вызов представления возвращает отрендеренный шаблон в виде строки, которую мы передаем в функцию `@html()` обновляя элемент `@el` контроллера.
 
-##Data association
+##Ассоциация с данными
 
-Eco templates deal entirely with strings, so it isn't possible to associate a template HTML element, with an object. For example, it isn't possible to render a list of records with Eco templates, listen to click events on them, and then associate those click events with the original records. Unfortunately, this is a fairly common scenario in web applications. 
+Шаблоны eco связываются внутри со строками и по этой причине невозможно ассоциировать html элемент шаблона с каким-либо объектом. Например, нельзя выполнить рендеринг списка записей в шаблонах Eco отслеживая событие клика левой клавишей мыши на нем, и затем ассоциировать события кликов с настоящими записями. Хотя это и достаточно популярная практика в разработке веб приложений.
 
-Luckily Hem comes to the rescue with `.jeco` templates. If you give view templates a `.jeco` extension, instead of `.eco`, they'll be wrapped in a jQuery selector which associates the element with the data. 
+К счастью Hem имеет решение, в виде `.jeco` шаблонов. Если вы даете шаблонами расширение `.jeco` вместо `.eco`, то они будут обернуты в jQuery селектор, который будет ассоциировать элемент страницы с данными.
 
     # app/views/contacts.jeco
     <div class="item"><%= @name %></div>
@@ -80,7 +80,7 @@ Luckily Hem comes to the rescue with `.jeco` templates. If you give view templat
         item = element.data('item')
         @log "Contact #{item.name} was clicked"
 
-As you can see in the `clicked()` callback, we're taking the event object `e`, finding the `element` it's associated with, and then finding the record associated  with that element, `item`. Spine provides a shortcut for this, in `spine/lib/tmpl`:
+Через коллбек `clicked()` мы обращаемся к объекту события `e`, находя `element` с которым событие ассоциировано, а затем находим запись, которая ассоциирована с этим элементом - `item`. Spine предоставляет сокращенный синтаксис для всего это в `spine/lib/tmpl`:
 
     # app/controllers/contacts.coffee
     require('spine/lib/tmpl')
@@ -89,15 +89,15 @@ As you can see in the `clicked()` callback, we're taking the event object `e`, f
         item = $(e.target).item()
         @log "Contact #{item.name} was clicked"
         
-The `tmpl.coffee` utility gives jQuery objects the `$.fn.item()` function, which will return the element's associated data. 
+Утилита `tmpl.coffee` добавляет в ваши объекты функцию `$.fn.item()` из jQuery, которая будет возвращать данные, что ассоциированы с элементами страницы.
 
-`.jeco` templates also have the advantage that you can give them an array to render, and they'll automatically iterate over it. 
+`.jeco` также имеют преимущество в том, что вы можете передавать в них массив для рендеринга, а они будут автоматически пробегать по нему и рендерить коллекцию элементов.
 
-##Template helpers
+##Хелперы шаблонов
 
-Template helpers are extremely useful for view specific logic, without violating MVC by putting lots of code in the view. Template helpers should exist as properties on the controller. Helpers can then be called by passing an instance of the controller to the template when rendering it. 
+Хелперы шаблонов весьма полезны для описания логики представлений без издевательства над MVC и помещением огромных кусков логики в файлы представлений. Хелперы шаблонов должны существовать только как свойства контроллеров. Хелперы могут быть вызваны через передачу экземпляра контроллера в шаблон при его рендеринге.
 
-For example, let's take the Currencies controller from the [sample Currency app](https://github.com/maccman/spine.mobile.currency). We need to format the `@output` and `@input` numbers a comma every three digits for legibility. This is the perfect scenario for a helper:
+Для примера, давайте рассмотрим контроллер Currencies из [простого приложения Currency](https://github.com/maccman/spine.mobile.currency). Нам необходимо отформатировать `@output` и `@input` числа, ставя запятую через каждые три цифры для удобства их чтения. Вот идеальный сценарий такого хелпера:
 
     class Currencies extends Spine.Controller
       render: ->
@@ -108,18 +108,18 @@ For example, let's take the Currencies controller from the [sample Currency app]
           format: (num) ->
             num.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")
 
-Inside the template we can call the helper, passing in the appropriate variables:
+Внутри шаблона мы можем вызывать хелпер и передавать в него необходимые переменные:
     
     <section class="input">
       <h1><%%= @helper.format(@input) %></h1>
       <h1><%%= @helper.format(@output) %></h1>
     </section>
     
-Simple and clean!
+Просто и чисто!
 
-##Binding
+##Связывание
 
-Data binding is a very powerful technique for ensuring model data stays in sync with the view. The premise is that controllers bind to model events, re-rendering the view when those events are triggered. Let's take a simple example, a list of contacts. The controller will bind to the `Contact` model's *refresh* and *change* events, which are triggered whenever the model's data changes. When the event is triggered, the controller re-renders the view.
+Связывание данных - это очень мощная техника, которая позволяет убедиться в том, что данные модели синхронизированы с представлением. Эта техника заключается в том, что контроллеры связываются с событиями модели повторно рендеря шаблоны после возникновения соответствующих событий. Давайте возьмем простой пример - список контактов. Контроллер будет привязан к событиям модели *refresh* и *change*, который возникают при каждый раз когда изменяются данные модели. Когда происходит определенное событие, контроллер повторно рендерит представление.
 
     class ContactsList extends Spine.Controller
       constructor: ->
@@ -129,6 +129,6 @@ Data binding is a very powerful technique for ensuring model data stays in sync 
         items = Contact.all()
         @html require('views/contacts')(items)
         
-Notice we're using a 'fat arrow' for the `render()` function. This ensures that `render()` is invoked in the correct context of `ContactsList`, rather than `Contact`. For more information on function binding, see the [classes guide](<%= docs_path("classes") %>).
+Обратите внимание на то, что мы используем 'fat arrow' ( => ) для функции `render()`. Благодаря этому мы убеждены в том, что `render()` вызывается в правильном контексте `ContactsList`, а не `Contact`. Чтобы узнать больше информации о привязке функций обратите внимание на [руководство по классам](<%= docs_path("classes") %>).
 
-There are several common binding patterns, see the [controller patterns guide](<%= docs_path("controller_patterns") %>) for more information.
+Существует несколько типичных паттернов связывания, подробнее о них можно узнать в [руководстве по паттернам контроллеров](<%= docs_path("controller_patterns") %>).
