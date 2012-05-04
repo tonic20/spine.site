@@ -23,10 +23,11 @@ set :rvm_type, :user
 
 after "deploy:update_code", "deploy:config"
 # after "deploy:update_code", "deploy:migrate"
-after "deploy:update", "deploy:cleanup"
 
 # Compile assets
-before "deploy:symlink", "deploy:assets"
+after "deploy:update_code", "deploy:assets"
+
+after "deploy:update", "deploy:cleanup"
 
 namespace :deploy do
   task :restart do
