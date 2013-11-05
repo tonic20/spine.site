@@ -2,7 +2,7 @@ set :rails_env, "production"
 
 set :user, "deploy"
 set :deploy_to, "/opt/spinejs.ru/"
-set :shared_host, "penzasoft.com"
+set :shared_host, "leo.penzasoft.com"
 
 role :web, shared_host
 role :app, shared_host
